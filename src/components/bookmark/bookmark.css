@@ -1,0 +1,46 @@
+.bookmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  color: inherit;
+  padding: 10px 12px;
+  gap: 4px;
+  text-decoration: inherit;
+  font-weight: 500;
+}
+
+.bookmark:hover {
+  color: inherit;
+  background: rgba(var(--text-color), 0.05);
+}
+
+.bookmark:focus-visible {
+  outline: none;
+  background: rgba(var(--text-color), 0.1);
+}
+
+.bookmark__favicon {
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+}
+
+.bookmark__title {
+  align-items: flex-start;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.bookmark__metadata {
+  display: flex;
+  gap: 8px;
+  margin-left: 24px;
+  font-size: 12px;
+  color: rgba(var(--text-color), 0.5);
+  font-weight: 400;
+}
+
+.bookmark:focus-visible .bookmark__metadata, .bookmark:hover .bookmark__metadata {
+  color: rgba(var(--text-color), 0.6);
+}

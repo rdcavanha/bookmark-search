@@ -1,0 +1,12 @@
+.tag {
+  border-radius: 16px;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  border: none;
+  font-size: 12px;
+}
+
+.tag:hover {
+  filter: brightness(130%);
+}

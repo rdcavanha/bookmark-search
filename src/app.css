@@ -1,0 +1,60 @@
+:root {
+  --bg-color: 32, 33, 36;
+  --text-color: 255, 255, 255;
+  --default-font-size: 13.5px;
+
+  font-size: var(--default-font-size);
+  font-weight: 400;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 100%;
+  margin: 0;
+  color-scheme: dark;
+  color: rgba(var(--text-color), 0.87);
+  background-color: rgb(var(--bg-color));
+  height: 600px;
+  width: 400px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+.app__header {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(var(--text-color), 0.07);
+}
+
+.app__tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 6px;
+  padding: 0;
+}
+
+.app__results {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex-grow: 1;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+}
