@@ -19,7 +19,7 @@ This extension is not available on the Chrome store. You need to manually build 
 
 Requirements:
 
-- [Node](https://nodejs.org/en) major version `18`
+- [Node](https://nodejs.org) major version `20`
 
 Steps:
 
