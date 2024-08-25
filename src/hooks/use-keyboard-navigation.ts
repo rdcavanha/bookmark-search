@@ -83,7 +83,7 @@ export const useKeyboardNavigation = () => {
           return handleArrowUpKeydown(e)
         if (e.key === 'F3' || (e.key === 'f' && e.ctrlKey))
           return focusSearchInputElement(e)
-        if (e.key === 'a' && e.ctrlKey)
+        if (e.key === 'a' && (e.ctrlKey || e.metaKey))
           return focusSearchInputElement(e)
         if (e.key !== 'Enter')
           typeInSearchInputElement()
