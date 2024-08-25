@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bookmark Search",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quickly search for bookmarks. Supports tags using `#`.",
   "action": {
     "default_popup": "index.html"
