@@ -41,6 +41,7 @@
   font-weight: 400;
 }
 
-.bookmark:focus-visible .bookmark__metadata, .bookmark:hover .bookmark__metadata {
+.bookmark:focus-visible .bookmark__metadata,
+.bookmark:hover .bookmark__metadata {
   color: rgba(var(--text-color), 0.6);
 }
