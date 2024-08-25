@@ -34,6 +34,7 @@ export const Bookmark = memo(({ title, url, breadcrumbs, dateAdded }: BookmarkPr
             <div>
               {' '}
               - Added
+              {' '}
               {dayjs().to(dayjs(dateAdded))}
             </div>
           )
