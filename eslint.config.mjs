@@ -11,4 +11,7 @@ export default antfu({
     'antfu/top-level-function': 'off',
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
   },
+  typescript: {
+    tsconfigPath: 'tsconfig.eslint.json',
+  },
 })

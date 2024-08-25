@@ -1,6 +1,6 @@
 import type { BookmarkProps } from '../components/bookmark'
 
-export const extractTags = (text: string): string[] => text.match(/#\w+(?=(\s+#\w+)*\s*$)/g) || []
+export const extractTags = (text: string): string[] => text.match(/#\w+(?=(?:\s+#\w+)*\s*$)/g) || []
 
 export const getUniqueTags = (flatBookmarks: BookmarkProps[]): string[] =>
   Array.from(

@@ -5,10 +5,10 @@ let lastFocusedBookmarkElement: HTMLElement | null = null
 const isBookmarkElement = (element: Element | null): element is HTMLAnchorElement =>
   element?.getAttribute('data-component') === 'bookmark'
 
-const getSearchInputElement = () =>
-  document.querySelector('[data-component="search-input"]') as HTMLInputElement | null
+const getSearchInputElement = (): HTMLInputElement | null =>
+  document.querySelector('[data-component="search-input"]')
 
-const getFirstBookmarkElement = () => document.querySelector('[data-component="bookmark"]') as HTMLAnchorElement | null
+const getFirstBookmarkElement = (): HTMLAnchorElement | null => document.querySelector('[data-component="bookmark"]')
 
 const handleArrowKeydown = (e: KeyboardEvent) => {
   const target = e.target as HTMLElement

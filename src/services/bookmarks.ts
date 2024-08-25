@@ -2,8 +2,8 @@ import type { BookmarkProps } from '../components/bookmark'
 import { extractTags, getUniqueTags } from './tags'
 
 const byDateAdded = (a: BookmarkProps, b: BookmarkProps) => {
-  const dateA = a.dateAdded || 0
-  const dateB = b.dateAdded || 0
+  const dateA = a.dateAdded ?? 0
+  const dateB = b.dateAdded ?? 0
   if (dateA < dateB)
     return 1
   if (dateA > dateB)
@@ -16,14 +16,14 @@ const adaptChromeBookmarks = (initialBookmarks: chrome.bookmarks.BookmarkTreeNod
 
   const adapt = (bookmarks: chrome.bookmarks.BookmarkTreeNode[]): BookmarkProps[] =>
     bookmarks.reduce<BookmarkProps[]>((acc, node) => {
-      if (node.url) {
+      if (node.url !== undefined) {
         return [
           ...acc,
           {
             id: node.id,
             title: node.title,
             url: node.url,
-            breadcrumbs: node.parentId ? breadcrumbs[node.parentId] || [] : [],
+            breadcrumbs: node.parentId !== undefined ? breadcrumbs[node.parentId] || [] : [],
             dateAdded: node.dateAdded,
             tags: extractTags(node.title),
           },
@@ -31,7 +31,7 @@ const adaptChromeBookmarks = (initialBookmarks: chrome.bookmarks.BookmarkTreeNod
       }
       if (node.children) {
         if (node.title) {
-          if (node.parentId && breadcrumbs[node.parentId]) {
+          if (node.parentId !== undefined && breadcrumbs[node.parentId]) {
             breadcrumbs[node.id] = [...(breadcrumbs[node.parentId] || []), node.title]
           }
           else {
@@ -46,7 +46,7 @@ const adaptChromeBookmarks = (initialBookmarks: chrome.bookmarks.BookmarkTreeNod
   return adapt(initialBookmarks).sort(byDateAdded)
 }
 
-export const getBookmarks = (): Promise<{ bookmarks: BookmarkProps[], tags: string[] }> =>
+export const getBookmarks = async (): Promise<{ bookmarks: BookmarkProps[], tags: string[] }> =>
   new Promise((resolve) => {
     chrome.bookmarks.getTree((results) => {
       const bookmarks = adaptChromeBookmarks(results)

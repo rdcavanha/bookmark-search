@@ -16,7 +16,7 @@ export const useBookmarks = (query: string) => {
   const [tags, setTags] = useState<string[]>([])
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const result = await getBookmarks()
       allBookmarks = result.bookmarks
       allTags = result.tags
