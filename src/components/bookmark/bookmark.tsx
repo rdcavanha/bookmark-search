@@ -23,22 +23,22 @@ const getFaviconUrl = (url: string) => {
 
 export const Bookmark = memo(({ title, url, breadcrumbs, dateAdded }: BookmarkProps) => (
   <a href={url} target="_blank" className="bookmark" rel="noreferrer" data-component="bookmark" title={url}>
-    <div className="bookmark__title">
+    <span className="bookmark__title">
       <img src={getFaviconUrl(url)} className="bookmark__favicon" alt="Favicon" />
-      <div>{title}</div>
-    </div>
-    <div className="bookmark__metadata">
-      <div>{breadcrumbs.join('/')}</div>
+      <span>{title}</span>
+    </span>
+    <span className="bookmark__metadata">
+      <span>{breadcrumbs.join('/')}</span>
       {dateAdded !== undefined
         ? (
-            <div>
+            <span>
               {'\u00A0'}
               - Added
               {'\u00A0'}
               {dayjs().to(dayjs(dateAdded))}
-            </div>
+            </span>
           )
         : null}
-    </div>
+    </span>
   </a>
 ))
