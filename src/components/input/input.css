@@ -1,10 +1,10 @@
 .input {
   font-family: inherit;
   width: 100%;
-  padding: 8px 10px;
-  border-radius: 8px;
+  padding: 9px 16px;
+  border-radius: 24px;
   border: 0;
-  background: black;
+  background: rgba(0, 0, 0, 0.5);
   font-size: var(--default-font-size);
   color: white;
 }
@@ -18,5 +18,5 @@
 }
 
 .input::placeholder {
-  color: white;
+  color: rgba(var(--text-color), 0.4);
 }
