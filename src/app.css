@@ -1,7 +1,7 @@
 :root {
   --bg-color: 32, 33, 36;
   --text-color: 255, 255, 255;
-  --default-font-size: 13.5px;
+  --default-font-size: 13px;
 
   font-size: var(--default-font-size);
   font-weight: 400;
@@ -45,8 +45,8 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  column-gap: 6px;
+  justify-content: flex-start;
+  gap: 4px;
   padding: 0;
 }
 

@@ -35,7 +35,7 @@
 .bookmark__metadata {
   display: flex;
   margin-left: 24px;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(var(--text-color), 0.5);
   font-weight: 400;
 }
