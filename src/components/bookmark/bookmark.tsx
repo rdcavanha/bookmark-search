@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import './bookmark.css'
 import { memo } from 'react'
+import { Tag } from '../tag'
 
 dayjs.extend(relativeTime)
 
@@ -14,6 +15,8 @@ export type BookmarkProps = {
   tags: string[]
 }
 
+const removeTags = (text: string) => text.replace(/\s*#\S+(?:\s+#\S+)*\s*$/, '').trim()
+
 const getFaviconUrl = (url: string) => {
   const faviconUrl = new URL(chrome.runtime.getURL('/_favicon/'))
   faviconUrl.searchParams.set('pageUrl', url)
@@ -21,11 +24,11 @@ const getFaviconUrl = (url: string) => {
   return faviconUrl.toString()
 }
 
-export const Bookmark = memo(({ title, url, breadcrumbs, dateAdded }: BookmarkProps) => (
+export const Bookmark = memo(({ title, url, breadcrumbs, dateAdded, tags }: BookmarkProps) => (
   <a href={url} target="_blank" className="bookmark" rel="noreferrer" data-component="bookmark" title={url}>
     <span className="bookmark__title">
       <img src={getFaviconUrl(url)} className="bookmark__favicon" alt="Favicon" />
-      <span>{title}</span>
+      <span>{removeTags(title)}</span>
     </span>
     <span className="bookmark__metadata">
       <span>{breadcrumbs.join('/')}</span>
@@ -39,6 +42,7 @@ export const Bookmark = memo(({ title, url, breadcrumbs, dateAdded }: BookmarkPr
             </span>
           )
         : null}
+      {tags.map(tag => <Tag key={tag} tag={tag} className="bookmark__tag" />)}
     </span>
   </a>
 ))

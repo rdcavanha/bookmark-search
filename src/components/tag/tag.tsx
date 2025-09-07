@@ -1,13 +1,15 @@
+import clsx from 'clsx'
 import './tag.css'
 
 type TagProps = {
   tag: string
-  count: number
+  count?: number
+  className?: string
 }
 
-export const Tag = ({ tag, count, ...props }: TagProps) => (
-  <div className="tag" {...props}>
+export const Tag = ({ tag, count, className, ...props }: TagProps) => (
+  <span className={clsx('tag', className, count !== undefined ? 'tag--with-count' : 'tag--without-count')} {...props}>
     {tag}
-    <span className="tag__count">{count}</span>
-  </div>
+    {count !== undefined ? <span className="tag__count">{count}</span> : null}
+  </span>
 )
