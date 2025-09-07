@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { BookmarkProps } from '../components/bookmark'
 import { getBookmarks } from '../services/bookmarks'
-import { getUniqueTags } from '../services/tags'
+import { getTags } from '../services/tags'
 
 const filterBookmarks = (query: string) => {
   const words = query.toLocaleLowerCase().split(' ')
@@ -9,11 +9,11 @@ const filterBookmarks = (query: string) => {
 }
 
 let allBookmarks: BookmarkProps[] = []
-let allTags: string[] = []
+let allTags: [string, number][] = []
 
 export const useBookmarks = (query: string) => {
   const [bookmarks, setBookmarks] = useState<BookmarkProps[]>([])
-  const [tags, setTags] = useState<string[]>([])
+  const [tags, setTags] = useState<[string, number][]>([])
 
   useEffect(() => {
     void (async () => {
@@ -32,7 +32,7 @@ export const useBookmarks = (query: string) => {
     }
     else {
       const filteredBookmarks = allBookmarks.filter(filterBookmarks(query))
-      const filteredTags = getUniqueTags(filteredBookmarks)
+      const filteredTags = getTags(filteredBookmarks)
       setBookmarks(filteredBookmarks)
       setTags(filteredTags)
     }

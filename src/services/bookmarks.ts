@@ -1,5 +1,5 @@
 import type { BookmarkProps } from '../components/bookmark'
-import { extractTags, getUniqueTags } from './tags'
+import { extractTags, getTags } from './tags'
 
 const byDateAdded = (a: BookmarkProps, b: BookmarkProps) => {
   const dateA = a.dateAdded ?? 0
@@ -46,11 +46,11 @@ const adaptChromeBookmarks = (initialBookmarks: chrome.bookmarks.BookmarkTreeNod
   return adapt(initialBookmarks).sort(byDateAdded)
 }
 
-export const getBookmarks = async (): Promise<{ bookmarks: BookmarkProps[], tags: string[] }> =>
+export const getBookmarks = async (): Promise<{ bookmarks: BookmarkProps[], tags: [string, number][] }> =>
   new Promise((resolve) => {
     chrome.bookmarks.getTree((results) => {
       const bookmarks = adaptChromeBookmarks(results)
-      const tags = getUniqueTags(bookmarks)
+      const tags = getTags(bookmarks)
       resolve({ bookmarks, tags })
     })
   })

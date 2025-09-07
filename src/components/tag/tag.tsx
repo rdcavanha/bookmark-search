@@ -1,7 +1,13 @@
 import './tag.css'
 
 type TagProps = {
-  children: React.ReactNode
+  tag: string
+  count: number
 }
 
-export const Tag = (props: TagProps) => <div className="tag" {...props} />
+export const Tag = ({ tag, count, ...props }: TagProps) => (
+  <div className="tag" {...props}>
+    {tag}
+    <span className="tag__count">{count}</span>
+  </div>
+)

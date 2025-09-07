@@ -32,8 +32,8 @@ export const App = () => {
           data-component="search-input"
         />
         <div className="app__tags">
-          {tags.map(tag => (
-            <Tag key={tag}>{tag}</Tag>
+          {tags.map(([tag, count]) => (
+            <Tag key={tag} tag={tag} count={count} />
           ))}
         </div>
       </header>
