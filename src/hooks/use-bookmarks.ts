@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { BookmarkProps } from '../components/bookmark'
 import { getBookmarks } from '../services/bookmarks'
 import { getTags } from '../services/tags'
 
 const filterBookmarks = (query: string) => {
   const words = query.toLocaleLowerCase().split(' ')
-  return (bookmark: BookmarkProps) => words.every(it => bookmark.title.toLowerCase().includes(it))
+  return (bookmark: BookmarkProps) => words.every(word => bookmark.title.toLowerCase().includes(word))
 }
-
-let allBookmarks: BookmarkProps[] = []
-let allTags: [string, number][] = []
 
 export const useBookmarks = (query: string) => {
   const [bookmarks, setBookmarks] = useState<BookmarkProps[]>([])
@@ -18,25 +15,17 @@ export const useBookmarks = (query: string) => {
   useEffect(() => {
     void (async () => {
       const result = await getBookmarks()
-      allBookmarks = result.bookmarks
-      allTags = result.tags
-      setBookmarks(allBookmarks)
-      setTags(allTags)
+      setBookmarks(result.bookmarks)
+      setTags(result.tags)
     })()
   }, [])
 
-  useEffect(() => {
+  return useMemo(() => {
     if (!query) {
-      setBookmarks(allBookmarks)
-      setTags(allTags)
+      return { bookmarks, tags }
     }
-    else {
-      const filteredBookmarks = allBookmarks.filter(filterBookmarks(query))
-      const filteredTags = getTags(filteredBookmarks)
-      setBookmarks(filteredBookmarks)
-      setTags(filteredTags)
-    }
-  }, [query])
-
-  return { bookmarks, tags }
+    const filteredBookmarks = bookmarks.filter(filterBookmarks(query))
+    const filteredTags = getTags(filteredBookmarks)
+    return { bookmarks: filteredBookmarks, tags: filteredTags }
+  }, [query, bookmarks, tags])
 }
