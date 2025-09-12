@@ -31,17 +31,7 @@ export const Bookmark = memo(({ title, url, breadcrumbs, dateAdded, tags }: Book
       <span>{removeTags(title)}</span>
     </span>
     <span className="bookmark__metadata">
-      <span>{breadcrumbs.join('/')}</span>
-      {dateAdded !== undefined
-        ? (
-            <span>
-              {'\u00A0'}
-              - Added
-              {'\u00A0'}
-              {dayjs().to(dayjs(dateAdded))}
-            </span>
-          )
-        : null}
+      {`${breadcrumbs.join('/')}${dateAdded !== undefined ? ` - Added ${dayjs().to(dayjs(dateAdded))}` : ''}`}
       {tags.map(tag => <Tag key={tag} tag={tag} className="bookmark__tag" />)}
     </span>
   </a>

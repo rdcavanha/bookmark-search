@@ -41,6 +41,12 @@
 
 .bookmark__tag {
   margin-left: 4px;
+  margin-right: 4px;
+}
+
+.bookmark__tag ~ .bookmark__tag {
+  margin-right: 4px;
+  margin-left: 0;
 }
 
 .bookmark:focus-visible .bookmark__metadata,
