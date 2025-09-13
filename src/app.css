@@ -19,7 +19,7 @@ body {
   color: rgba(var(--text-color), 0.87);
   background-color: rgb(var(--bg-color));
   height: 600px;
-  width: 400px;
+  width: 440px;
 }
 
 #root {
