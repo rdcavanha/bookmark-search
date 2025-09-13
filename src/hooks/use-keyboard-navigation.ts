@@ -10,7 +10,7 @@ const getSearchInputElement = (): HTMLInputElement | null =>
 
 const getFirstBookmarkElement = (): HTMLAnchorElement | null => document.querySelector('[data-component="bookmark"]')
 
-const handleArrowKeydown = (e: KeyboardEvent) => {
+const handleArrowDown = (e: KeyboardEvent) => {
   const target = e.target as HTMLElement
   const searchInput = getSearchInputElement()
   if (target === searchInput) {
@@ -31,7 +31,7 @@ const handleArrowKeydown = (e: KeyboardEvent) => {
   }
 }
 
-const handleArrowUpKeydown = (e: KeyboardEvent) => {
+const handleArrowUp = (e: KeyboardEvent) => {
   const target = e.target as HTMLElement
   const searchInput = getSearchInputElement()
   if (target === searchInput) {
@@ -53,6 +53,16 @@ const handleArrowUpKeydown = (e: KeyboardEvent) => {
     else {
       searchInput?.focus()
     }
+  }
+}
+
+const handleTab = (e: KeyboardEvent) => {
+  e.preventDefault()
+  if (e.shiftKey) {
+    handleArrowUp(e)
+  }
+  else {
+    handleArrowDown(e)
   }
 }
 
@@ -78,15 +88,17 @@ export const useKeyboardNavigation = () => {
       const target = e.target as HTMLElement | null
       if (target) {
         if (e.key === 'ArrowDown')
-          return handleArrowKeydown(e)
+          return handleArrowDown(e)
         if (e.key === 'ArrowUp')
-          return handleArrowUpKeydown(e)
+          return handleArrowUp(e)
         if (e.key === 'F3' || (e.key === 'f' && e.ctrlKey))
           return focusSearchInputElement(e)
         if (e.key === 'a' && (e.ctrlKey || e.metaKey))
           return focusSearchInputElement(e)
-        if (e.key !== 'Enter')
-          typeInSearchInputElement()
+        if (e.key === 'Tab')
+          return handleTab(e)
+        if (e.key !== 'Enter' && e.key !== 'Shift')
+          return typeInSearchInputElement()
       }
       return undefined
     }
